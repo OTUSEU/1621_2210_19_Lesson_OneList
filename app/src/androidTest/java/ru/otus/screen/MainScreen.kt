@@ -1,20 +1,19 @@
 package ru.otus.screen
 
+import android.content.Intent
 import android.view.View
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.kaspersky.kaspresso.screens.KScreen
 import com.lolo.io.onelist.OneListFragment
-import io.github.kakaocup.kakao.edit.KEditText
-import io.github.kakaocup.kakao.screen.Screen
 import com.lolo.io.onelist.R
+import io.github.kakaocup.kakao.edit.KEditText
 import io.github.kakaocup.kakao.image.KImageView
+import io.github.kakaocup.kakao.intent.KIntent
 import io.github.kakaocup.kakao.recycler.KRecyclerItem
 import io.github.kakaocup.kakao.recycler.KRecyclerView
-import io.github.kakaocup.kakao.text.KButton
 import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.allOf
 import ru.otus.component.KImageButton
+import ru.otus.component.KStrikethroughTextView
 
 object MainScreen : KScreen<MainScreen>() {
 
@@ -32,20 +31,67 @@ object MainScreen : KScreen<MainScreen>() {
     val taskListRv = KRecyclerView(
         {
             withId(R.id.itemsRecyclerView)
-        },
-        itemTypeBuilder = {
+        }, itemTypeBuilder = {
             itemType(::TaskItem)
         }
     )
+
+    val shareListB = KImageButton {
+        withId(R.id.buttonShareList)
+    }
+
+    val deleteListB = KImageButton {
+        withId(R.id.buttonRemoveList)
+    }
+
+    val editListB = KImageButton {
+        withId(R.id.buttonEditList)
+    }
+
+    val listNameEt = KEditText {
+        withId(R.id.listTitle)
+    }
+
+    val approveListB = KImageButton {
+        withId(R.id.validateEditList)
+    }
+
+    val approveDeleteListB = KImageButton {
+        withId(R.id.validateDeleteList)
+    }
+
+    val listRv: KRecyclerView = KRecyclerView(
+        {
+            withId(R.id.listsRecyclerView)
+        }, itemTypeBuilder = {
+            itemType(::ListItem)
+        }
+    )
+
+    val sharedIntent = KIntent {
+        hasAction(Intent.ACTION_CHOOSER)
+    }
+
 
     internal class TaskItem(parent: Matcher<View>) : KRecyclerItem<TaskItem>(parent) {
         val icon = KImageView(parent) {
             withId(R.id.badge)
         }
 
-        val description = KTextView(parent) {
+        val description = KStrikethroughTextView(parent) {
             withId(R.id.text)
         }
     }
 
+    internal class ListItem(parent: Matcher<View>) : KRecyclerItem<ListItem>(parent) {
+        val listTitle = KTextView {
+            withId(R.id.textView)
+            withText("Tuto ❓")
+        }
+
+        val renamedListTitle = KTextView {
+            withId(R.id.textView)
+            withText("Today")
+        }
+    }
 }

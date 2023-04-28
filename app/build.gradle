@@ -85,14 +85,18 @@ dependencies {
     implementation 'com.karumi:dexter:6.0.0'
     implementation 'io.github.tonnyl:whatsnew:0.1.2'
     implementation 'com.google.firebase:firebase-crashlytics:18.3.6'
-    androidTestImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+
+    androidTestImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.5.1"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.5.1"
     androidTestImplementation project(path: ':app')
     androidTestImplementation 'io.github.kakaocup:kakao:3.2.2'
     androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.5.1'
-    androidTestUtil("androidx.test:orchestrator:1.4.2")
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:1.5.1"
+    androidTestImplementation project(path: ':app')
+    androidTestUtil 'androidx.test:orchestrator:1.4.2'
 }
 
 def props = new Properties()
