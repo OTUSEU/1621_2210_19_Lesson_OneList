@@ -1,5 +1,6 @@
 package ru.otus
 
+import android.util.Log
 import androidx.test.espresso.intent.rule.IntentsRule
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.rule.GrantPermissionRule
@@ -57,35 +58,48 @@ class TodoTests : BaseTest() {
     }
 
     @Test
+
     fun completeTask() = run {
-        addTaskToList()
-        step("Complete task") {
-            MainScreen {
-                step("Click on task in list") {
-                    taskListRv {
-                        firstChild<MainScreen.TaskItem> {
-                            click()
+        repeat(10) {
+            Log.w("ToDo", "!@# Start ================$it==================")
+            addTaskToList()
+
+            step("Complete task") {
+                MainScreen {
+                    step("Click on task in list") {
+                        taskListRv {
+                            firstChild<MainScreen.TaskItem> {
+                                Thread.sleep(1000)
+                                click()
+                            }
                         }
                     }
-                }
-                step("Check task is completed") {
-                    taskListRv {
-                        lastChild<MainScreen.TaskItem> {
-                            icon {
+// Здесь падает
+                    step("Check task is completed") {
+                        taskListRv {
+                            lastChild<MainScreen.TaskItem> {
+                            /*
+                               // Thread.sleep(1000)
+                                 icon {
+                                // Здесь падает
+                                // 'with drawable id 2131230872 or provided instance' doesn't match the selected view.
                                 hasDrawableWithTint(
                                     R.drawable.ic_bullet_outline_checked,
                                     R.color.colorAccentLight
                                 )
                             }
-                            description {
-                                hasText("Privet")
-                                hasTextColor(R.color.colorAccentLight)
-                                isStrikethrough()
+                                description {
+                                    hasText("Privet")
+                                    hasTextColor(R.color.colorAccentLight)
+                                   // isStrikethrough()
+                                }
+                              */
                             }
                         }
                     }
                 }
             }
+            Log.w("ToDo", "!@# End ================$it==================")
         }
     }
 

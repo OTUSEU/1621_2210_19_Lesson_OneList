@@ -97,6 +97,7 @@ dependencies {
     androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:1.5.1"
     androidTestImplementation project(path: ':app')
     androidTestUtil 'androidx.test:orchestrator:1.4.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
 }
 
 def props = new Properties()
