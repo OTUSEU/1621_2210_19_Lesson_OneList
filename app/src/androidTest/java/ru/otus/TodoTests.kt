@@ -6,17 +6,19 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.rule.GrantPermissionRule
 import com.lolo.io.onelist.MainActivity
 import com.lolo.io.onelist.R
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import ru.otus.screen.MainScreen
 
 class TodoTests : BaseTest() {
 // На некоторых эмуляторах для записи касперским скриншотов может понабиться текст:
+   /*
     @get:Rule
     val permissionRule: GrantPermissionRule = GrantPermissionRule.grant(
         android.Manifest.permission.READ_EXTERNAL_STORAGE,
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-    )
+    )*/
 
     @get:Rule
     val applicationRule = ActivityScenarioRule(MainActivity::class.java)
@@ -24,6 +26,15 @@ class TodoTests : BaseTest() {
     @get:Rule
     val intentsRule = IntentsRule()
 
+    @Ignore
+    @Test
+    fun repeateTest() = run {
+         repeat(10) {
+             Log.d("ToDo", "!@# Start ================$it==================")
+             completeTask()
+             Log.d("ToDo", "!@# End ================$==================")
+         }
+    }
 
     @Test
     fun addTaskToList() = run {
@@ -60,10 +71,7 @@ class TodoTests : BaseTest() {
     @Test
 
     fun completeTask() = run {
-        repeat(10) {
-            Log.w("ToDo", "!@# Start ================$it==================")
             addTaskToList()
-
             step("Complete task") {
                 MainScreen {
                     step("Click on task in list") {
@@ -74,15 +82,10 @@ class TodoTests : BaseTest() {
                             }
                         }
                     }
-// Здесь падает
                     step("Check task is completed") {
                         taskListRv {
                             lastChild<MainScreen.TaskItem> {
-                            /*
-                               // Thread.sleep(1000)
                                  icon {
-                                // Здесь падает
-                                // 'with drawable id 2131230872 or provided instance' doesn't match the selected view.
                                 hasDrawableWithTint(
                                     R.drawable.ic_bullet_outline_checked,
                                     R.color.colorAccentLight
@@ -91,16 +94,14 @@ class TodoTests : BaseTest() {
                                 description {
                                     hasText("Privet")
                                     hasTextColor(R.color.colorAccentLight)
-                                   // isStrikethrough()
+                                    isStrikethrough()
                                 }
-                              */
+
                             }
                         }
                     }
                 }
             }
-            Log.w("ToDo", "!@# End ================$it==================")
-        }
     }
 
     @Test
