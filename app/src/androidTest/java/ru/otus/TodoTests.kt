@@ -3,7 +3,6 @@ package ru.otus
 import android.util.Log
 import androidx.test.espresso.intent.rule.IntentsRule
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.rule.GrantPermissionRule
 import com.lolo.io.onelist.MainActivity
 import com.lolo.io.onelist.R
 import org.junit.Ignore
@@ -77,7 +76,6 @@ class TodoTests : BaseTest() {
                     step("Click on task in list") {
                         taskListRv {
                             firstChild<MainScreen.TaskItem> {
-                                Thread.sleep(1000)
                                 click()
                             }
                         }
@@ -200,5 +198,4 @@ class TodoTests : BaseTest() {
             }
         }
     }
-
 }
