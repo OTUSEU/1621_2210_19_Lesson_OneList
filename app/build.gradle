@@ -92,12 +92,11 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.5.1"
     androidTestImplementation "androidx.test.espresso:espresso-intents:3.5.1"
     androidTestImplementation project(path: ':app')
-    androidTestImplementation 'io.github.kakaocup:kakao:3.2.2'
-    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.5.1'
-    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:1.5.1"
-    androidTestImplementation project(path: ':app')
+    androidTestImplementation 'io.github.kakaocup:kakao:3.2.3'
+    androidTestImplementation 'com.kaspersky.android-components:kaspresso:1.5.2'
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:1.5.2"
     androidTestUtil 'androidx.test:orchestrator:1.4.2'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
+
 }
 
 def props = new Properties()
