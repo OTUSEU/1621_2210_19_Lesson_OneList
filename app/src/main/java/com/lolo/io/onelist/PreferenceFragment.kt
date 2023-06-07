@@ -30,7 +30,7 @@ class PreferenceFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.settings, rootKey)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -49,7 +49,7 @@ class PreferenceFragment : PreferenceFragmentCompat() {
         this.preferenceScreen.get<Preference>("version")?.summary = mainActivity.persistence.version
 
 
-        preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener { _, key ->
+        preferenceManager.sharedPreferences?.registerOnSharedPreferenceChangeListener { _, key ->
             when(key) {
                 "theme" -> activity.recreate()/*{
                     activity.finish()
@@ -63,8 +63,8 @@ class PreferenceFragment : PreferenceFragmentCompat() {
         }
     }
 
-    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
-        when (preference?.key) {
+    override fun onPreferenceTreeClick(preference: Preference): Boolean {
+        when (preference.key) {
             "storage" -> defaultPathDialog(mainActivity) { path ->
                 mainActivity.persistence.defaultPath = path
                 displayDefaultPath()
